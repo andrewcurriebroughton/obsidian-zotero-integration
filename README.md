@@ -1,3 +1,5 @@
+This fork adds GROBID support (https://grobid.readthedocs.io/en/latest/Introduction/) for analyzing a paper's reference data and extracts it so that it can be accessed from the `referenceTitles` Nunjucks template variable. To enable, toggle the "Analyze References" option in the plugin's settings. Java and GROBID must be installed, and GROBID needs to be running on `http://localhost:8070`. At the moment, only the reference titles are extracted, but this could be extended to include the other GROBID routes.
+
 ## Obsidian Zotero Integration
 
 Insert and import citations, bibliographies, notes, and PDF annotations from Zotero into Obsidian. Requires the [Better BibTeX for Zotero](https://retorque.re/zotero-better-bibtex/installation/) plugin.
