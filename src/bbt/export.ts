@@ -36,6 +36,7 @@ import {
   removeStartingSlash,
   wrapAnnotationTemplate,
 } from './template.helpers';
+import { getReferenceTitles } from 'src/grobid/processReferences';
 
 async function processNote(citeKey: CiteKey, note: any) {
   if (note.note) {
@@ -234,7 +235,8 @@ async function processItem(
   importDate: moment.Moment,
   database: DatabaseWithPort,
   cslStyle?: string,
-  skipRelations?: boolean
+  skipRelations?: boolean,
+  analyzeReferencesState?: boolean
 ) {
   const citekey = getCiteKeyFromAny(item);
   item.importDate = importDate;
@@ -281,6 +283,10 @@ async function processItem(
     } catch {
       item.bibliography = 'Error generating bibliography';
     }
+  }
+
+  if (analyzeReferencesState === true) {
+    item.referenceTitles = await getReferenceTitles(item)
   }
 
   if (item.notes) {
@@ -531,7 +537,7 @@ export async function exportToMarkdown(
   const createdOrUpdatedMarkdownFiles: string[] = [];
 
   for (let i = 0, len = itemData.length; i < len; i++) {
-    await processItem(itemData[i], importDate, database, exportFormat.cslStyle);
+    await processItem(itemData[i], importDate, database, exportFormat.cslStyle, false, settings.analyzeReferencesState);
   }
 
   const vaultRoot = getVaultRoot();

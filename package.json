@@ -29,6 +29,7 @@
     "@types/nunjucks": "3.2.3",
     "@types/react-dom": "18.2.6",
     "@types/which": "^3.0.0",
+    "@types/xml2js": "^0.4.11",
     "@typescript-eslint/eslint-plugin": "5.61.0",
     "@typescript-eslint/parser": "5.61.0",
     "babel-jest": "29.5.0",
@@ -60,6 +61,7 @@
     "react-json-tree": "0.18.0",
     "react-select": "5.7.3",
     "shell-path": "^3.0.0",
-    "which": "^3.0.1"
+    "which": "^3.0.1",
+    "xml2js": "^0.6.0"
   }
 }

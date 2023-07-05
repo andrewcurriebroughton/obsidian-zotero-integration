@@ -32,6 +32,7 @@ const commandPrefix = 'obsidian-zotero-desktop-connector:';
 const citationCommandIDPrefix = 'zdc-';
 const exportCommandIDPrefix = 'zdc-exp-';
 const DEFAULT_SETTINGS: ZoteroConnectorSettings = {
+  analyzeReferencesState: false,
   database: 'Zotero',
   noteImportFolder: '',
   pdfExportImageDPI: 120,

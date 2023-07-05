@@ -90,6 +90,8 @@ function SettingsComponent({
 
   const [concat, setConcat] = React.useState(!!settings.shouldConcat);
 
+  const [analyzeReferencesState, setAnalyzeReferencesState] = React.useState(settings.analyzeReferencesState);
+
   const updateCite = React.useCallback(
     debounce(
       (index: number, format: CitationFormat) => {
@@ -392,7 +394,7 @@ function SettingsComponent({
             >
               tesseract
             </a>{' '}
-            be installed on your system. Tesseract can be installed from
+            be installed on your system. Tesseract can be installed from{' '}
             <a href="https://brew.sh/" target="_blank" rel="noreferrer">
               homebrew on mac
             </a>
@@ -594,6 +596,20 @@ function SettingsComponent({
           className={`checkbox-container${
             citekeyReferenceHideLinks ? ' is-enabled' : ''
           }`}
+        />
+      </SettingItem>
+      <SettingItem
+        name="Analyze References"
+        description="Attempt to extract reference titles using GROBID"
+      >
+        <div
+          onClick={() =>
+            setAnalyzeReferencesState((s) => {
+              updateSetting('analyzeReferencesState', !s)
+              return !s
+            })
+          }
+          className={`checkbox-container${analyzeReferencesState ? ' is-enabled' : ''}`}
         />
       </SettingItem>
     </div>
