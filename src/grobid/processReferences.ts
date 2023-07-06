@@ -97,7 +97,7 @@ function parseReferencesXML(xml: string) {
   return titles
 }
 export async function getReferenceTitles(item: any) {
-  const modal = new LoadingModal(app, 'Analyzng references...');
+  const modal = new LoadingModal(app, 'Analyzing references...');
   if (await isGrobidRunning()) {
     modal.open()
     const referenceXML = await extractStructuredReferenceData(item)
