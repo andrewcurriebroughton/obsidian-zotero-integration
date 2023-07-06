@@ -47060,7 +47060,7 @@ function parseReferencesXML(xml) {
   return titles;
 }
 async function getReferenceTitles(item) {
-  const modal = new LoadingModal(app, "Analyzng references...");
+  const modal = new LoadingModal(app, "Analyzing references...");
   if (await isGrobidRunning()) {
     modal.open();
     const referenceXML = await extractStructuredReferenceData(item);
