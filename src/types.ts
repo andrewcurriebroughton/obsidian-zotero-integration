@@ -77,6 +77,7 @@ export interface ZoteroConnectorSettings {
   database: Database;
   port?: string;
   exeVersion?: string;
+  _exeInternalVersion?: number;
   exeOverridePath?: string;
   exportFormats: ExportFormat[];
   noteImportFolder: string;
