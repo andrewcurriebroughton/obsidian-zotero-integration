@@ -242,7 +242,8 @@ async function processItem(
   database: DatabaseWithPort,
   cslStyle?: string,
   skipRelations?: boolean,
-  analyzeReferencesState?: boolean
+  analyzeReferencesState?: boolean,
+  skipUnavailableReferencesState?: boolean
 ) {
   const citekey = getCiteKeyFromAny(item);
   item.importDate = importDate;
@@ -292,7 +293,7 @@ async function processItem(
   }
 
   if (analyzeReferencesState === true) {
-    item.referenceTitles = await getReferenceTitles(item)
+    item.referenceTitles = await getReferenceTitles(item, skipUnavailableReferencesState)
   }
 
   if (item.notes) {
@@ -546,7 +547,7 @@ export async function exportToMarkdown(
   const createdOrUpdatedMarkdownFiles: string[] = [];
 
   for (let i = 0, len = itemData.length; i < len; i++) {
-    await processItem(itemData[i], importDate, database, exportFormat.cslStyle, false, settings.analyzeReferencesState);
+    await processItem(itemData[i], importDate, database, exportFormat.cslStyle, false, settings.analyzeReferencesState, settings.skipUnavailableReferencesState);
   }
 
   const vaultRoot = getVaultRoot();

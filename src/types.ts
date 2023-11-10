@@ -72,6 +72,7 @@ export interface RenderCiteTemplateParams {
 
 export interface ZoteroConnectorSettings {
   analyzeReferencesState: boolean;
+  skipUnavailableReferencesState: boolean;
   citeFormats: CitationFormat[];
   citeSuggestTemplate?: string;
   database: Database;

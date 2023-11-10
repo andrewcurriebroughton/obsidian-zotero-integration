@@ -30,6 +30,7 @@ const citationCommandIDPrefix = 'zdc-';
 const exportCommandIDPrefix = 'zdc-exp-';
 const DEFAULT_SETTINGS: ZoteroConnectorSettings = {
   analyzeReferencesState: false,
+  skipUnavailableReferencesState: false,
   database: 'Zotero',
   noteImportFolder: '',
   pdfExportImageDPI: 120,

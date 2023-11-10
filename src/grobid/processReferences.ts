@@ -67,7 +67,7 @@ async function extractStructuredReferenceData(item: any): Promise<string> {
     })
   })
 }
-function parseReferencesXML(xml: string) {
+function parseReferencesXML(xml: string, skipUnavailable: boolean) {
   const titles: any[] = []
   parseString(xml, (_error, data) => {
     const references = data.TEI.text[0].back[0].div[0].listBibl[0].biblStruct
@@ -77,6 +77,7 @@ function parseReferencesXML(xml: string) {
         if (reference.analytic[0].title) {
           if (reference.analytic[0].title[0]._ && reference.analytic[0].title[0]._.length > 0) {
             title = reference.analytic[0].title[0]._
+            console.log(1, title, skipUnavailable)
             titles.push(title)
           }
         }
@@ -85,23 +86,26 @@ function parseReferencesXML(xml: string) {
         if (reference.monogr[0].title) {
           if (reference.monogr[0].title[0]._ && reference.monogr[0].title[0]._.length > 0) {
             title = reference.monogr[0].title[0]._
+            console.log(2, title, skipUnavailable)
             titles.push(title)
           }
         }
       }
-      if (!title) {
+      console.log(3, title, skipUnavailable)
+      if (!title && !skipUnavailable) {
         titles.push('Not available')
       }
     }
   });
   return titles
 }
-export async function getReferenceTitles(item: any) {
+export async function getReferenceTitles(item: any, skipUnavailable: boolean) {
   const modal = new LoadingModal(app, 'Analyzing references...');
+  modal.open()
   if (await isGrobidRunning()) {
-    modal.open()
+    // modal.open()
     const referenceXML = await extractStructuredReferenceData(item)
-    const referenceTitles = parseReferencesXML(referenceXML)
+    const referenceTitles = parseReferencesXML(referenceXML, skipUnavailable)
     modal.close()
     return referenceTitles
   }

@@ -53,6 +53,8 @@ function SettingsComponent({
 
   const [analyzeReferencesState, setAnalyzeReferencesState] = React.useState(settings.analyzeReferencesState);
 
+  const [skipUnavailableReferencesState, setSkipUnavailableReferencesState] = React.useState(settings.skipUnavailableReferencesState);
+
   const updateCite = React.useCallback(
     debounce(
       (index: number, format: CitationFormat) => {
@@ -473,6 +475,20 @@ function SettingsComponent({
             })
           }
           className={`checkbox-container${analyzeReferencesState ? ' is-enabled' : ''}`}
+        />
+      </SettingItem>
+      <SettingItem
+        name="Skip Unavailable References"
+        description="If GROBID can't analyze a reference title, ignore it. Otherwise, the title will read 'Not available'."
+      >
+        <div
+          onClick={() =>
+            setSkipUnavailableReferencesState((s) => {
+              updateSetting('skipUnavailableReferencesState', !s)
+              return !s
+            })
+          }
+          className={`checkbox-container${skipUnavailableReferencesState ? ' is-enabled' : ''}`}
         />
       </SettingItem>
     </div>
