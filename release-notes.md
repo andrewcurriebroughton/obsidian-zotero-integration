@@ -1,1 +1,1 @@
-d76155b Fix issues with persist tags (fix #301)
+cd3dfe0 Fix #320
